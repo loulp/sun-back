@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bijoux",
+  "info": {
+    "singularName": "bijou",
+    "pluralName": "bijoux",
+    "displayName": "bijou",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": false
+    },
+    "photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "bijoux"
+    },
+    "collection": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::collection.collection",
+      "inversedBy": "bijoux"
+    },
+    "prix": {
+      "type": "float",
+      "required": true
+    }
+  }
+}
