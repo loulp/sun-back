@@ -13,15 +13,36 @@ const { createCoreController } = require("@strapi/strapi").factories;
 module.exports = createCoreController(
   "api::commande.commande",
   ({ strapi }) => ({
+    checkPrice(products) {
+      let totalPrice = 0;
+
+      products.forEach((el) => {
+        strapi
+          .service("api::bijou.bijou")
+          .findOne(el.id)
+          .then(
+            (res) => {
+              console.log("bijou " + el.id);
+              this.totalPrice = this.totalPrice + res.prix;
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+      });
+
+      console.log("function total : " + totalPrice);
+      return totalPrice;
+    },
 
     async createPaymentIntent(ctx) {
-      
-      //TODO Envoyé prix total et liste des id produits pour le calcul coté back du prix
       try {
+        //TODO Envoyé prix total et liste des id produits pour le calcul coté back du prix
+        // const totalPrice = this.checkPrice(ctx.request.body.produits);
         console.log(ctx.request.body);
 
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: 10 * 100,
+          amount: ctx.request.body.prix_total * 100,
           currency: "eur",
         });
 
