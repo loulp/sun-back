@@ -18,7 +18,14 @@ module.exports = [
   "strapi::poweredBy",
   "strapi::logger",
   "strapi::query",
-  "strapi::body",
+  {
+    name: "strapi::body",
+    config: {
+      enabled: true,
+      multipart: true,
+      includeUnparsed: true,
+    },
+  },
   "strapi::favicon",
   "strapi::public",
 ];

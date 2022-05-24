@@ -46,7 +46,7 @@ module.exports = createCoreController(
           currency: "eur",
         });
 
-        const secret = paymentIntent.client_secret;
+        const secret = paymentIntent;
 
         return secret;
       } catch (err) {

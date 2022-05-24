@@ -1,9 +1,9 @@
 module.exports = {
-    routes: [
-      {
-        method: 'GET',
-        path: '/stripePaymentSuccess',
-        handler: 'webhook.stripePaymentSuccess',
-      }
-    ]
-  }
+  routes: [
+    {
+      method: "POST",
+      path: "/stripePaymentSuccess",
+      handler: "webhook.stripePaymentSuccess",
+    },
+  ],
+};

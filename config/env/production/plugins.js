@@ -13,4 +13,22 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  email: {
+    config: {
+      provider: "nodemailer",
+      // TODO update with SUN email
+      providerOptions: {
+        host: env("SMTP_HOST", "outlook.com"),
+        port: env("SMTP_PORT", 587),
+        auth: {
+          user: "llp_dev@outlook.com",
+          pass: "Lerw@ylive56",
+        },
+      },
+      settings: {
+        defaultFrom: "llp_dev@outlook.com",
+        defaultReplyTo: "llp_dev@outlook.com",
+      },
+    },
+  },
 });
