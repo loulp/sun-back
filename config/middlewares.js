@@ -26,6 +26,7 @@ module.exports = [
       includeUnparsed: true,
     },
   },
+  "strapi::session",
   "strapi::favicon",
   "strapi::public",
 ];
