@@ -21,8 +21,8 @@ module.exports = ({ env }) => ({
         host: env("SMTP_HOST", "outlook.com"),
         port: env("SMTP_PORT", 587),
         auth: {
-          user: "llp_dev@outlook.com",
-          pass: "Lerw@ylive56",
+          user: process.env.EMAIL,
+          pass: process.env.EMAIL_PASS,
         },
       },
       settings: {
