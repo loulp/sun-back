@@ -17,14 +17,18 @@ module.exports = ({ env }) => ({
     config: {
       provider: "nodemailer",
       providerOptions: {
-        // host: env("SMTP_HOST", "smtp-mail.outlook.com"),
-        // port: env("SMTP_PORT", 587),
-        // secure: false,
+        host: env("SMTP_HOST", "smtp-mail.outlook.com"),
+        port: env("SMTP_PORT", 587),
+        secureConnection: false, // TLS requires secureConnection to be false
+        logger: true,
         service: "hotmail",
         auth: {
           user: process.env.EMAIL,
           pass: process.env.EMAIL_PASS,
         },
+        tls: {
+          ciphers:'SSLv3'
+      }
       },
       settings: {
         defaultFrom: "llp_dev@outlook.com",

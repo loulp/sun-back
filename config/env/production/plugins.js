@@ -18,14 +18,17 @@ module.exports = ({ env }) => ({
       provider: "nodemailer",
       // TODO update with SUN email
       providerOptions: {
-        // host: env("SMTP_HOST", "smtp-mail.outlook.com"),
-        // port: env("SMTP_PORT", 587),
-        // secure: false,
-        service: "hotmail",
+        host: env("SMTP_HOST", "smtp-mail.outlook.com"),
+        port: env("SMTP_PORT", 587),
+        secureConnection: false, // TLS requires secureConnection to be false
+        logger: true,
         auth: {
-          user: process.env.EMAIL,
-          pass: process.env.EMAIL_PASS,
+          user: env("EMAIL"),
+          pass: env("EMAIL_PASS"),
         },
+        tls: {
+          ciphers:'SSLv3'
+      }
       },
       settings: {
         defaultFrom: "llp_dev@outlook.com",
