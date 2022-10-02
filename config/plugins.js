@@ -16,11 +16,11 @@ module.exports = ({ env }) => ({
   email: {
     config: {
       provider: "nodemailer",
-      // TODO update with SUN email
       providerOptions: {
-        host: env("SMTP_HOST", "smtp-mail.outlook.com"),
-        port: env("SMTP_PORT", 587),
-        secure: false,
+        // host: env("SMTP_HOST", "smtp-mail.outlook.com"),
+        // port: env("SMTP_PORT", 587),
+        // secure: false,
+        service: "hotmail",
         auth: {
           user: process.env.EMAIL,
           pass: process.env.EMAIL_PASS,

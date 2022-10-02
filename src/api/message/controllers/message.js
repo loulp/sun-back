@@ -25,6 +25,8 @@ module.exports = createCoreController("api::message.message", ({ strapi }) => ({
     } catch (err) {
       console.log(err);
       ctx.body = err;
+      ctx.response.status = 500;
+
     }
   },
 }));
