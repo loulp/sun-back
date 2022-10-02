@@ -1,5 +1,6 @@
 "use strict";
 
+// TODO add env var
 const stripe = require("stripe")(
   "sk_test_51KXq5eJSoM2Bze2H0tQtx2F8oHoCWvvp3PVybCj0PG5iUv3TURe5HXYRYMVWI7am4SUclQpA4x5LXIzOZXolf46A00csgdYKrq"
 );
@@ -44,6 +45,7 @@ module.exports = createCoreController(
         const paymentIntent = await stripe.paymentIntents.create({
           amount: ctx.request.body.prix_total * 100,
           currency: "eur",
+          automatic_payment_methods: {enabled: true},
         });
 
         const secret = paymentIntent;
