@@ -97,14 +97,14 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
                 produits: entry.produits,
               },
               address: {
-                street: entry.address.slice(0, entry.address.indexOf(",")),
-                city: entry.address.slice(
-                  entry.address.lastIndexOf(",") + 2,
-                  entry.address.length
+                street: entry.adresse.slice(0, entry.adresse.indexOf(",")),
+                city: entry.adresse.slice(
+                  entry.adresse.lastIndexOf(",") + 2,
+                  entry.adresse.length
                 ),
-                postalCode: entry.address.slice(
-                  entry.address.indexOf(",") + 2,
-                  entry.address.lastIndexOf(",")
+                postalCode: entry.adresse.slice(
+                  entry.adresse.indexOf(",") + 2,
+                  entry.adresse.lastIndexOf(",")
                 ),
               },
               idCommand: entry.id,
