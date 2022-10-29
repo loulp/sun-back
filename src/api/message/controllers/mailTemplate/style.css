@@ -1,0 +1,50 @@
+html,
+body {
+  margin: 0;
+  font-family: "Abhaya Libre", serif;
+}
+
+.header {
+  height: 160px;
+  width: 100%;
+  background-color: #38515f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("header.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.title {
+  font-size: 24px;
+  color: #38515f;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 3%;
+}
+
+.contentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  background-color: white;
+}
+
+.infoContainer {
+    padding: 3%;
+    border: 1px solid #efdebd;    
+}
+
+.footer {
+  height: 100px;
+  width: 100%;
+  background-color: #38515f;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  color: white;
+}

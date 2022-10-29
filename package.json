@@ -15,10 +15,11 @@
     "@strapi/provider-email-nodemailer": "^4.1.11",
     "@strapi/provider-upload-cloudinary": "^4.1.11",
     "@strapi/strapi": "4.1.8",
+    "better-sqlite3": "7.4.6",
     "koa-body": "^5.0.0",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0",
-    "better-sqlite3": "7.4.6",
+    "strapi-plugin-email-designer": "^2.1.1",
     "stripe": "^8.207.0"
   },
   "author": {

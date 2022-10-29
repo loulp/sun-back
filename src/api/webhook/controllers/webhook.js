@@ -41,17 +41,17 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
             {
               filters: {
                 paymentIntent: {
-                  //TODO remove test intent
                   $eq: paymentIntentSuccess.id,
-                  // $eq: "pi_3L2cVqJSoM2Bze2H1UgqmS7I",
                 },
               },
             }
           );
 
-          const entry = await strapi.entityService.update(
+          const entry = entries[0];
+
+          await strapi.entityService.update(
             "api::commande.commande",
-            entries[0].id,
+            entry.id,
             {
               data: {
                 paymentConfirmed: true,
@@ -60,21 +60,12 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
           );
 
           let itemList = `<ul>`;
-          entries[0].produits.forEach((element) => {
+          entry.produits.forEach((element) => {
             itemList =
               itemList +
               `<li>Bijou: ${element.nom}, taille: ${element.size}, prix: ${element.prix}€</li>`;
           });
           itemList = itemList + `</ul>`;
-
-          const clientEmailTemplate = {
-            subject: "Confirmation de votre commande",
-            text: null,
-            html: `<h1>Votre commande chez SUN</h1>
-              <p>Votre commande a bien été reçu<p>
-              ${itemList}
-              `,
-          };
 
           const sellerEmailTemplate = {
             subject: "Une nouvelle commande à été passée !",
@@ -82,23 +73,47 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
             html: `<h1>TEMA LA TAILLE DE LA COMMANDE</h1>
               <p>Une nouvelle commande a été reçu :<p>
               <ul>
-              <li>Id strapi de la commande : ${entries[0].id}</li>
-              <li>Total : ${entries[0].prix_total}€</li>
+              <li>Id strapi de la commande : ${entry.id}</li>
+              <li>Total : ${entry.prix_total}€</li>
               </ul>
               ${itemList}
               `,
           };
 
-          await strapi.plugins["email"].services.email.sendTemplatedEmail(
+          await strapi.plugins[
+            "email-designer"
+          ].services.email.sendTemplatedEmail(
             {
-              to: entries[0].email,
+              to: entry.email,
+              // TODO change with SUN email (dans strapi -> mail setting aussi)
+              from: "llp_dev@outlook.com",
             },
-            clientEmailTemplate
+            {
+              templateReferenceId: 1,
+              subject: `Confirmation de votre commande`,
+            },
+            {
+              order: {
+                produits: entry.produits,
+              },
+              address: {
+                street: entry.address.slice(0, entry.address.indexOf(",")),
+                city: entry.address.slice(
+                  entry.address.lastIndexOf(",") + 2,
+                  entry.address.length
+                ),
+                postalCode: entry.address.slice(
+                  entry.address.indexOf(",") + 2,
+                  entry.address.lastIndexOf(",")
+                ),
+              },
+              idCommand: entry.id,
+            }
           );
 
-          // TODO uncomment for prod
           await strapi.plugins["email"].services.email.sendTemplatedEmail(
             {
+              // TODO Mail de typhen
               to: "louislepogam@gmail.com",
             },
             sellerEmailTemplate
@@ -116,7 +131,7 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
 
           await strapi.plugins["email"].services.email.sendTemplatedEmail(
             {
-              to: entries[0].email,
+              to: entry.email,
             },
             failTemplate
           );
