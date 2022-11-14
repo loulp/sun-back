@@ -1,6 +1,5 @@
 "use strict";
 
-// TODO add env var
 const stripe = require("stripe")(process.env.STRIPE_TOKEN);
 
 /**

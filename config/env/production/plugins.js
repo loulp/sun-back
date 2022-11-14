@@ -27,12 +27,12 @@ module.exports = ({ env }) => ({
           pass: env("EMAIL_PASS"),
         },
         tls: {
-          ciphers:'SSLv3'
-      }
+          ciphers: "SSLv3",
+        },
       },
       settings: {
-        defaultFrom: "llp_dev@outlook.com",
-        defaultReplyTo: "llp_dev@outlook.com",
+        defaultFrom: "s.u.n.jewelry@hotmail.com",
+        defaultReplyTo: "s.u.n.jewelry@hotmail.com",
       },
     },
   },

@@ -86,7 +86,7 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
             {
               to: entry.email,
               // TODO change with SUN email (dans strapi -> mail setting aussi)
-              from: "llp_dev@outlook.com",
+              from: "s.u.n.jewelry@hotmail.com",
             },
             {
               templateReferenceId: 1,
@@ -114,7 +114,7 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
           await strapi.plugins["email"].services.email.sendTemplatedEmail(
             {
               // TODO Mail de typhen
-              to: "louislepogam@gmail.com",
+              to: "s.u.n.jewelry@hotmail.com",
             },
             sellerEmailTemplate
           );

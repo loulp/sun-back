@@ -13,7 +13,7 @@ module.exports = createCoreController("api::message.message", ({ strapi }) => ({
 
       await strapi.plugins["email"].services.email.send({
         // TODO change with SUN email (dans strapi -> mail setting aussi)
-        to: "llp_dev@outlook.com",
+        to: "s.u.n.jewelry@hotmail.com",
         replyTo: ctx.request.body.email,
         subject: ctx.request.body.subject,
         text: `${ctx.request.body.message} 
