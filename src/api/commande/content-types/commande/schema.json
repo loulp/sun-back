@@ -51,6 +51,10 @@
       "default": false,
       "required": true,
       "private": true
+    },
+    "telephone": {
+      "type": "string",
+      "required": true
     }
   }
 }
