@@ -10,16 +10,17 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.1.8",
-    "@strapi/plugin-users-permissions": "4.1.8",
+    "@strapi/plugin-i18n": "4.4.1",
+    "@strapi/plugin-users-permissions": "4.4.1",
     "@strapi/provider-email-nodemailer": "^4.1.11",
     "@strapi/provider-upload-cloudinary": "^4.1.11",
-    "@strapi/strapi": "4.1.8",
+    "@strapi/strapi": "4.4.1",
     "better-sqlite3": "7.4.6",
     "koa-body": "^5.0.0",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0",
     "strapi-plugin-email-designer": "^2.1.1",
+    "strapi-plugin-fuzzy-search": "^1.10.2",
     "stripe": "^8.207.0"
   },
   "author": {
