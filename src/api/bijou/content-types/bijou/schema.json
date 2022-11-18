@@ -44,6 +44,10 @@
     "prix": {
       "type": "float",
       "required": true
+    },
+    "matiere": {
+      "type": "string",
+      "required": true
     }
   }
 }
