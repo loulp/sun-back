@@ -2,9 +2,8 @@
 
 const stripe = require("stripe");
 const unparsed = Symbol.for("unparsedBody");
-const endpointSecret =
-  // "whsec_cb68cdc6f0e967d2a51110dc7900541d0bd9ce27cdeb1bb7b72336f803ebc2a1";
-  "whsec_cQtVFceYbn0dkr4Nmg639VPNSxwoFaB5";
+const endpointSecret = "whsec_6uP7GaHyAicSG9X7oJJYIq7hyZYkTpdo";
+// DEV const endpointSecret = "whsec_cQtVFceYbn0dkr4Nmg639VPNSxwoFaB5";
 
 /**
  *  webhook controller
