@@ -18,8 +18,8 @@ module.exports = ({ env }) => ({
       provider: "nodemailer",
       // TODO update with SUN email
       providerOptions: {
-        host: env("SMTP_HOST", "smtp.office365.com"),
-        port: env("SMTP_PORT", 587),
+        host: env("SMTP_HOST", "ssl0.ovh.net"),
+        port: env("SMTP_PORT", 465),
         secureConnection: false, // TLS requires secureConnection to be false
         logger: true,
         auth: {
