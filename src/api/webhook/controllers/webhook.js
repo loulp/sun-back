@@ -86,7 +86,7 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
             {
               to: entry.email,
               // TODO change with SUN email (dans strapi -> mail setting aussi)
-              from: "s.u.n.jewelry@hotmail.com",
+              from: "contact@sunjewelry.fr",
             },
             {
               templateReferenceId: 1,
@@ -97,14 +97,14 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
                 produits: entry.produits,
               },
               address: {
-                street: entry.adresse.slice(0, entry.adresse.indexOf(",")),
-                city: entry.adresse.slice(
-                  entry.adresse.lastIndexOf(",") + 2,
-                  entry.adresse.length
+                street: entry.LIVR_adresse.slice(0, entry.LIVR_adresse.indexOf(",")),
+                city: entry.LIVR_adresse.slice(
+                  entry.LIVR_adresse.lastIndexOf(",") + 2,
+                  entry.LIVR_adresse.length
                 ),
-                postalCode: entry.adresse.slice(
-                  entry.adresse.indexOf(",") + 2,
-                  entry.adresse.lastIndexOf(",")
+                postalCode: entry.LIVR_adresse.slice(
+                  entry.LIVR_adresse.indexOf(",") + 2,
+                  entry.LIVR_adresse.lastIndexOf(",")
                 ),
               },
               idCommand: entry.id,
@@ -114,7 +114,7 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
           await strapi.plugins["email"].services.email.sendTemplatedEmail(
             {
               // TODO Mail de typhen
-              to: "s.u.n.jewelry@hotmail.com",
+              to: "contact@sunjewelry.fr",
             },
             sellerEmailTemplate
           );

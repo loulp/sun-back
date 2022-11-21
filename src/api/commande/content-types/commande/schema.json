@@ -12,11 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "nom": {
+    "LIVR_nom": {
       "type": "string",
       "required": true
     },
-    "prenom": {
+    "LIVR_prenom": {
       "type": "string",
       "required": true
     },
@@ -24,7 +24,7 @@
       "type": "email",
       "required": true
     },
-    "adresse": {
+    "LIVR_adresse": {
       "type": "text",
       "required": true
     },
@@ -52,8 +52,32 @@
       "required": true,
       "private": true
     },
-    "telephone": {
+    "LIVR_telephone": {
       "type": "string",
+      "required": true
+    },
+    "LIVR_retrait_atelier": {
+      "type": "boolean",
+      "required": true
+    },
+    "FACT_nom": {
+      "type": "string",
+      "required": true
+    },
+    "FACT_prenom": {
+      "type": "string",
+      "required": true
+    },
+    "FACT_telephone": {
+      "type": "string",
+      "required": true
+    },
+    "FACT_adresse": {
+      "type": "text",
+      "required": true
+    },
+    "suivi_commande": {
+      "type": "boolean",
       "required": true
     }
   }

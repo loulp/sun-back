@@ -31,8 +31,8 @@ module.exports = ({ env }) => ({
         },
       },
       settings: {
-        defaultFrom: "s.u.n.jewelry@hotmail.com",
-        defaultReplyTo: "s.u.n.jewelry@hotmail.com",
+        defaultFrom: "contact@sunjewelry.fr",
+        defaultReplyTo: "contact@sunjewelry.fr",
       },
     },
   },
