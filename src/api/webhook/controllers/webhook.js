@@ -58,33 +58,11 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
             }
           );
 
-          let itemList = `<ul>`;
-          entry.produits.forEach((element) => {
-            itemList =
-              itemList +
-              `<li>Bijou: ${element.nom}, taille: ${element.size}, prix: ${element.prix}€</li>`;
-          });
-          itemList = itemList + `</ul>`;
-
-          const sellerEmailTemplate = {
-            subject: "Une nouvelle commande à été passée !",
-            text: null,
-            html: `<h1>TEMA LA TAILLE DE LA COMMANDE</h1>
-              <p>Une nouvelle commande a été reçu :<p>
-              <ul>
-              <li>Id strapi de la commande : ${entry.id}</li>
-              <li>Total : ${entry.prix_total}€</li>
-              </ul>
-              ${itemList}
-              `,
-          };
-
           await strapi.plugins[
             "email-designer"
           ].services.email.sendTemplatedEmail(
             {
               to: entry.email,
-              // TODO change with SUN email (dans strapi -> mail setting aussi)
               from: "contact@sunjewelry.fr",
             },
             {
@@ -95,7 +73,7 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
               order: {
                 produits: entry.produits,
               },
-              address: {
+              deliveryAddress: {
                 street: entry.LIVR_adresse.slice(
                   0,
                   entry.LIVR_adresse.indexOf(",")
@@ -109,33 +87,92 @@ module.exports = createCoreController("api::webhook.webhook", ({ strapi }) => ({
                   entry.LIVR_adresse.lastIndexOf(",")
                 ),
               },
+              billingAddress: {
+                street: entry.FACT_adresse.slice(
+                  0,
+                  entry.FACT_adresse.indexOf(",")
+                ),
+                city: entry.FACT_adresse.slice(
+                  entry.FACT_adresse.lastIndexOf(",") + 2,
+                  entry.FACT_adresse.length
+                ),
+                postalCode: entry.FACT_adresse.slice(
+                  entry.FACT_adresse.indexOf(",") + 2,
+                  entry.FACT_adresse.lastIndexOf(",")
+                ),
+              },
               idCommand: entry.id,
             }
           );
 
-          await strapi.plugins["email"].services.email.sendTemplatedEmail(
+          await strapi.plugins[
+            "email-designer"
+          ].services.email.sendTemplatedEmail(
             {
-              // TODO Mail de typhen
               to: "contact@sunjewelry.fr",
+              from: "contact@sunjewelry.fr",
             },
-            sellerEmailTemplate
+            {
+              templateReferenceId: 3,
+              subject: `Une commande a été passée !`,
+            },
+            {
+              firstname: entry.FACT_prenom,
+              lastname: entry.FACT_nom,
+              email: entry.email,
+              delPhone: entry.LIVR_telephone,
+              bilPhone: entry.FACT_telephone,
+              idCommand: entry.id,
+              total: entry.prix_total,
+              retrait: entry.LIVR_retrait_atelier === true ? "Oui" : "Non",
+              suivi: entry.suivi_commande === true ? "Oui" : "Non",
+              deliveryAddress: {
+                street: entry.LIVR_adresse.slice(
+                  0,
+                  entry.LIVR_adresse.indexOf(",")
+                ),
+                city: entry.LIVR_adresse.slice(
+                  entry.LIVR_adresse.lastIndexOf(",") + 2,
+                  entry.LIVR_adresse.length
+                ),
+                postalCode: entry.LIVR_adresse.slice(
+                  entry.LIVR_adresse.indexOf(",") + 2,
+                  entry.LIVR_adresse.lastIndexOf(",")
+                ),
+              },
+              billingAddress: {
+                street: entry.FACT_adresse.slice(
+                  0,
+                  entry.FACT_adresse.indexOf(",")
+                ),
+                city: entry.FACT_adresse.slice(
+                  entry.FACT_adresse.lastIndexOf(",") + 2,
+                  entry.FACT_adresse.length
+                ),
+                postalCode: entry.FACT_adresse.slice(
+                  entry.FACT_adresse.indexOf(",") + 2,
+                  entry.FACT_adresse.lastIndexOf(",")
+                ),
+              },
+              order: {
+                produits: entry.produits,
+              },
+            }
           );
           break;
-        case "payment_intent.payment_failed":
-          //  Then define and call a function to handle the event payment_intent.succeeded
-          // TODO Send mail to client
-          const failTemplate = {
-            subject: "Echec du paiement",
-            text: null,
-            html: `<h1>Votre commande chez SUN</h1>
-              <p>Votre commande n'a pas été reçu<p>`,
-          };
 
-          await strapi.plugins["email"].services.email.sendTemplatedEmail(
+        case "payment_intent.payment_failed":
+          await strapi.plugins[
+            "email-designer"
+          ].services.email.sendTemplatedEmail(
             {
               to: entry.email,
+              from: "contact@sunjewelry.fr",
             },
-            failTemplate
+            {
+              templateReferenceId: 2,
+              subject: `Erreur lors de votre commande`,
+            }
           );
           break;
         default:
